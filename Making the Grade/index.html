@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Grades</title>
+</head>
+<body>
+  <h1>Student Grades</h1>
+
+  <div id="studentData"></div>
+
+  <script>
+    var grades = "jim|25, sue|32, mary|34, ann|22, ted|28, frank|15, lisa|19, mike|30, ahn|26, vishaya|27";
+
+    var students = grades.split(", ");
+
+    students.sort();
+
+    var lowestScore = Infinity;
+    var highestScore = -Infinity;
+    var totalScore = 0;
+
+    students.forEach(function(student) {
+      var parts = student.split("|");
+      var name = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+      var score = parseInt(parts[1]);
+
+      lowestScore = Math.min(lowestScore, score);
+      highestScore = Math.max(highestScore, score);
+
+      totalScore += score;
+
+      var studentInfo = document.createElement("p");
+      studentInfo.textContent = name + " - " + score;
+      document.getElementById("studentData").appendChild(studentInfo);
+    });
+
+    var averageScore = totalScore / students.length;
+
+    var summary = document.createElement("p");
+    summary.innerHTML = "Total Students: " + students.length +
+                        " | Lowest Score: " + lowestScore +
+                        " | Highest Score: " + highestScore +
+                        " | Average Score: " + averageScore.toFixed(2);
+    document.getElementById("studentData").appendChild(summary);
+  </script>
+</body>
+</html>
+
+
