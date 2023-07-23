@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+
+<h1>Functions & validation</h1>
+
+<form id="form1" action="#" onsubmit="return validateForm(this);">
+  first name: <input type="text" name="firstname"><br>
+  last name: <input type="text" name="lastname"><br>
+  password: <input type="password" name="password"><br>
+
+  <button>Check</button>
+</form>
+
+<hr>
+<div id="message"></div>
+
+<script>
+
+const validatePassword = (password) => {
+  return password.length >= 8 && /[a-z]/.test(password) && /[A-Z]/.test(password);
+}
+
+const validateForm = (myForm) => {
+  var firstname = myForm.firstname.value;
+  var lastname = myForm.lastname.value;
+  var password = myForm.password.value;
+
+  if (firstname.trim() === "" || lastname.trim() === "") {
+    $("#message").html("Please enter both first name and last name.");
+    return false;
+  }
+
+  if (!validatePassword(password)) {
+    $("#message").html("Invalid password. Password should have at least 8 characters, at least one uppercase letter, and at least one lowercase letter.");
+    return false;
+  }
+
+  $("#message").html("All fields are valid.");
+  return false;
+}
+
+</script>
+
+</body>
+</html>
